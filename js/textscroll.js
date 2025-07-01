@@ -16,6 +16,26 @@ $(window).on('scroll', function () {
   });
 });
 
+// 画面を読み込んだ時の処理を指定
+$(window).on('load', function () {
+  // ページ内の各要素に対して処理を実行
+  $('html,body').each(function() {
+    // ブラウザの最上部から要素までの位置を取得
+    const targetPosition = $(this).offset().top;
+    // ブラウザの最上部からのスクロール量を取得
+    const scroll = $(window).scrollTop();
+    // ウィンドウの高さを取得
+    const windowHeight = $(window).height();
+    // ブラウザの最上部からのスクロール量 > 要素の位置 - ウィンドウの高さ の場合
+    if (scroll > targetPosition - windowHeight) {
+      // ページトップへ移動する
+      $('html,body').animate({
+        scrollTop: 0
+      });
+    }
+  });
+});
+
 // ホバーした時の処理を指定
 $('.content').hover(function() {
   // クラスを追加してテキストを移動させる
