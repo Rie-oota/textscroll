@@ -1,10 +1,10 @@
 // グローバル変数をboolean型で定義
-let scrollFlag = true;
+let scrollFlag = false;
 
 // スクロール操作した時の処理を指定
 $(window).on('scroll', function () {
   // scrollFlagがfalseであれば処理を抜ける
-  if (scrollFlag = false) {
+  if (scrollFlag == false) {
     return;
   }
   // クラス名【inview】が付与されている要素に対して処理を実行
