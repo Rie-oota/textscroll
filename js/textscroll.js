@@ -18,14 +18,16 @@ $(window).on('scroll', function () {
 
 // 画面を読み込んだ時の処理を指定
 $(window).on('load', function () {
-  // クラス名【show】を外す
-  $('.inview').each(function() {
-    $(this).removeClass('show');
-  });
-    // ページトップへ移動する
+  // ページトップへ移動する
   $('html,body').animate({
     scrollTop: 0
-  });
+    // アニメーション完了後に実行する処理
+  },function() {
+      // クラス名【show】を外す
+      $('.inview').each(function() {
+        $(this).removeClass('show');
+      });
+    });
 });
 
 // ホバーした時の処理を指定
