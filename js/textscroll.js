@@ -1,27 +1,34 @@
+// グローバル変数をboolean型で定義
+const scrollFlag = true;
+
 // スクロール操作した時の処理を指定
 $(window).on('scroll', function () {
-  // クラス名【inview】が付与されている要素に対して処理を実行
-  $('.inview').each(function() {
-    // ブラウザの最上部から要素までの位置を取得
-    const targetPosition = $(this).offset().top;
-    // ブラウザの最上部からのスクロール量を取得
-    const scroll = $(window).scrollTop();
-    // ウィンドウの高さを取得
-    const windowHeight = $(window).height();
-    // ブラウザの最上部からのスクロール量 > 要素の位置 - ウィンドウの高さ の場合
-    if (scroll > targetPosition - windowHeight) {
-      // クラス名【show】を追加
-      $(this).addClass('show');
-    }
-  });
+  // scrollFlagがtrueであれば処理を実行
+  if (scrollFlag) {
+    // クラス名【inview】が付与されている要素に対して処理を実行
+    $('.inview').each(function() {
+      // ブラウザの最上部から要素までの位置を取得
+      const targetPosition = $(this).offset().top;
+      // ブラウザの最上部からのスクロール量を取得
+      const scroll = $(window).scrollTop();
+      // ウィンドウの高さを取得
+      const windowHeight = $(window).height();
+      // ブラウザの最上部からのスクロール量 > 要素の位置 - ウィンドウの高さ の場合
+      if (scroll > targetPosition - windowHeight) {
+        // クラス名【show】を追加
+        $(this).addClass('show');
+      }
+    });
+  }else{
+    // scrollFlagがfalseであればアーリーリターン
+    return false;
+  }
 });
 
 // 画面を読み込んだ時の処理を指定
 $(window).on('load', function () {
-  // グローバル変数をboolean型で定義
-  const boolvalue = true;
   // if判定で処理を分岐する
-  if (boolvalue) {
+  if (scrollFlag) {
     // ページトップへ移動する
     $('html,body').animate({
       scrollTop: 0
@@ -31,6 +38,7 @@ $(window).on('load', function () {
       $('.inview').each(function() {
         $(this).removeClass('show');
       });
+      scrollFlag = true;
     });
   }else{
     // スクロールイベント内の処理を実行しないようにする
