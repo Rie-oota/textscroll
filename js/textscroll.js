@@ -18,34 +18,42 @@ $(window).on('scroll', function () {
 
 // 画面を読み込んだ時の処理を指定
 $(window).on('load', function () {
-  // ページトップへ移動する
-  $('html,body').animate({
-    scrollTop: 0
-    // アニメーション完了後に実行する処理
-  },function() {
+  // グローバル変数をboolean型で定義
+  const boolvalue = true;
+  // if判定で処理を分岐する
+  if (boolvalue) {
+    // ページトップへ移動する
+    $('html,body').animate({
+      scrollTop: 0
+      // アニメーション完了後に実行する処理
+    },function() {
       // クラス名【show】を外す
       $('.inview').each(function() {
         $(this).removeClass('show');
       });
     });
+  }else{
+    // スクロールイベント内の処理を実行しないようにする
+    $(window).off('scroll');
+  }
 });
 
 // ホバーした時の処理を指定
 $('.content').hover(function() {
   // クラスを追加してテキストを移動させる
-  $('.first').addClass('move');
-  $('.last').addClass('move');
+  $(this).find('.first').addClass('move');
+  $(this).find('.last').addClass('move');
   // クラスを追加して画像サイズを縮小する
-  $('.img_view').addClass('move');
+  $(this).find('.img_view').addClass('move');
   // クラスを追加して画像をズームする
-  $('.img_item').addClass('move');
+  $(this).find('.img_item').addClass('move');
   // ホバーを外した時の処理を指定
 },function(){
   // クラスを外してテキストを移動させる
-  $('.first').removeClass('move');
-  $('.last').removeClass('move');
+  $(this).find('.first').removeClass('move');
+  $(this).find('.last').removeClass('move');
   // クラスを外して画像サイズを1倍に戻す
-  $('.img_view').removeClass('move');
+  $(this).find('.img_view').removeClass('move');
   // クラスを外して画像のズームを解除する
-  $('.img_item').removeClass('move');
+  $(this).find('.img_item').removeClass('move');
 });
